@@ -1,12 +1,14 @@
 import { useState } from "react";
-import logo from "./images/header__logo.svg";
-import pencil from "./images/editPencil.svg";
-import editButton from "./images/button__edit.svg";
-import addButton from "./images/button__add-post.svg";
-import closeIcon from "./images/popup__closeicon.png";
-import like from "./images/grid__box-like.svg";
-import trashIcon from "./images/Trash_icon.svg";
-import profilePhoto from "./images/profile__photo-full.jpg";
+// import logo from "./images/header__logo.svg";
+import pencil from "../images/editPencil.svg";
+import editButton from "../images/button__edit.svg";
+import addButton from "../images/button__add-post.svg";
+import closeIcon from "../images/popup__closeicon.png";
+import like from "../images/grid__box-like.svg";
+import trashIcon from "../images/Trash_icon.svg";
+import profilePhoto from "../images/profile__photo-full.jpg";
+
+import Header from "./Header/Header.jsx";
 // import reactLogo from "./assets/react.svg";
 // import viteLogo from "/vite.svg";
 // import "./App.css";
@@ -17,10 +19,7 @@ function App() {
   return (
     <>
       <div className="page__content">
-        <header className="header">
-          <img src={logo} alt="Logo Around the USA" className="header__logo" />
-          <hr className="header__line" />
-        </header>
+        <Header />
         <main>
           <section className="profile">
             <div className="profile__info">
@@ -86,7 +85,7 @@ function App() {
                         className="popup__closer"
                       />
                       <h2 className="popup__title">Tem certeza?</h2>
-                      <form className="form popup__form" novalidate>
+                      <form className="form popup__form" noValidate>
                         <button
                           type="submit"
                           className="form__button form__deleteConfirmation"
