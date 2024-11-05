@@ -1,7 +1,15 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import logo from "./images/header__logo.svg";
+import pencil from "./images/editPencil.svg";
+import editButton from "./images/button__edit.svg";
+import addButton from "./images/button__add-post.svg";
+import closeIcon from "./images/popup__closeicon.png";
+import like from "./images/grid__box-like.svg";
+import trashIcon from "./images/Trash_icon.svg";
+import profilePhoto from "./images/profile__photo-full.jpg";
+// import reactLogo from "./assets/react.svg";
+// import viteLogo from "/vite.svg";
+// import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -10,11 +18,7 @@ function App() {
     <>
       <div className="page__content">
         <header className="header">
-          <img
-            src="./images/header__logo.svg"
-            alt="Logo Around the USA"
-            className="header__logo"
-          />
+          <img src={logo} alt="Logo Around the USA" className="header__logo" />
           <hr className="header__line" />
         </header>
         <main>
@@ -22,30 +26,34 @@ function App() {
             <div className="profile__info">
               <div className="profile__info-photo-portrait">
                 <img
-                  src="./images/editPencil.svg"
+                  src={pencil}
                   alt="Ícone de lápis"
                   className="profile__edit-pencil"
                 />
-                <img alt="Foto de perfil" className="profile__photo" />
+                <img
+                  src={profilePhoto}
+                  alt="Foto de perfil"
+                  className="profile__photo"
+                />
               </div>
               <div>
                 <div className="profile__info-content">
-                  <h1 className="profile__info-name"></h1>
+                  <h1 className="profile__info-name">Jacques Cousteau</h1>
                   <button type="button" className="profile__button-open-form">
                     <img
-                      src="./images/button__edit.svg"
+                      src={editButton}
                       alt="Botão de editar perfil"
                       className="profile__button-open-form-img"
                     />
                   </button>
                 </div>
-                <p className="profile__info-bio"></p>
+                <p className="profile__info-bio">Explorar</p>
               </div>
             </div>
 
             <button type="button" className="profile__button-add-post">
               <img
-                src="./images/button__add-post.svg"
+                src={addButton}
                 className="profile__button-add-post-img"
                 alt="caractere de adição"
               />
@@ -57,7 +65,7 @@ function App() {
                 <div className="grid__display" id="popupOverlay">
                   <div className="grid__display-container">
                     <img
-                      src="./images/popup__closeicon.png"
+                      src={closeIcon}
                       alt="Ícone para fechar popup"
                       className="grid__display-closer popup__closer"
                     />
@@ -73,7 +81,7 @@ function App() {
                   >
                     <div className="popup__container">
                       <img
-                        src="./images/popup__closeicon.png"
+                        src={closeIcon}
                         alt="Ícone para fechar popup"
                         className="popup__closer"
                       />
@@ -97,7 +105,7 @@ function App() {
                   <h2 className="grid__content-title"></h2>
                   <div>
                     <img
-                      src="./images/grid__box-like.svg"
+                      src={like}
                       className="grid__content-like"
                       alt="Icone de coração"
                     />
@@ -106,7 +114,7 @@ function App() {
                 </div>
 
                 <img
-                  src="./images/Trash_icon.svg"
+                  src={trashIcon}
                   className="grid__delete-button"
                   alt="Ícone de lixeira"
                 />
