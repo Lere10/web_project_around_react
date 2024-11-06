@@ -3,8 +3,8 @@ import pencil from "../../images/editPencil.svg";
 import editButton from "../../images/button__edit.svg";
 import addButton from "../../images/button__add-post.svg";
 import closeIcon from "../../images/popup__closeicon.png";
-import like from "../../images/grid__box-like.svg";
-import trashIcon from "../../images/Trash_icon.svg";
+//import like from "../../images/grid__box-like.svg";
+//import trashIcon from "../../images/Trash_icon.svg";
 import profilePhoto from "../../images/profile__photo-full.jpg";
 
 import Popup from "./components/Popup/Popup.jsx";
@@ -12,8 +12,30 @@ import NewCard from "./components/Popup/components/NewCard/NewCard.jsx";
 import EditProfile from "./components/Popup/components/EditProfile/EditProfile.jsx";
 import EditAvatar from "./components/Popup/components/EditAvatar/EditAvatar.jsx";
 
+import Card from "./components/Card/Card.jsx";
+
 import { useState } from "react";
-// import "../../blocks/"
+
+const cards = [
+  {
+    isLiked: false,
+    _id: "5d1f0611d321eb4bdcd707dd",
+    name: "Yosemite Valley",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
+    owner: "5d1f0611d321eb4bdcd707dd",
+    createdAt: "2019-07-05T08:10:57.741Z",
+  },
+  {
+    isLiked: false,
+    _id: "5d1f064ed321eb4bdcd707de",
+    name: "Lake Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
+    owner: "5d1f0611d321eb4bdcd707dd",
+    createdAt: "2019-07-05T08:11:58.324Z",
+  },
+];
+
+console.log(cards);
 
 export default function Main() {
   const [popup, setPopup] = useState(null);
@@ -87,65 +109,13 @@ export default function Main() {
           />
         </button>
       </section>
-      <section className="grid">
-        <template id="grid">
-          <div className="grid__box">
-            <div className="grid__display" id="popupOverlay">
-              <div className="grid__display-container">
-                <img
-                  src={closeIcon}
-                  alt="Ícone para fechar popup"
-                  className="grid__display-closer popup__closer"
-                />
-                <img className="grid__display-image" />
-                <p className="grid__display-title"></p>
-              </div>
-            </div>
 
-            <div className="popup" id="popupDeletePost">
-              <div className="popup popupWithConfirmation" id="popupOverlay">
-                <div className="popup__container">
-                  <img
-                    src={closeIcon}
-                    alt="Ícone para fechar popup"
-                    className="popup__closer"
-                  />
-                  <h2 className="popup__title">Tem certeza?</h2>
-                  <form className="form popup__form" noValidate>
-                    <button
-                      type="submit"
-                      className="form__button form__deleteConfirmation"
-                    >
-                      Sim
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
+      <ul className="grid">
+        {cards.map((card) => (
+          <Card key={card._id} card={card} />
+        ))}
+      </ul>
 
-            <div className="grid__box-portrait">
-              <img className="grid__box-portrait-photo" />
-            </div>
-            <div className="grid__content">
-              <h2 className="grid__content-title"></h2>
-              <div>
-                <img
-                  src={like}
-                  className="grid__content-like"
-                  alt="Icone de coração"
-                />
-                <span className="grid__content-likeNumber"></span>
-              </div>
-            </div>
-
-            <img
-              src={trashIcon}
-              className="grid__delete-button"
-              alt="Ícone de lixeira"
-            />
-          </div>
-        </template>
-      </section>
       {popup && (
         <Popup onClose={handleClosePopup} title={popup.title}>
           {popup.children}
