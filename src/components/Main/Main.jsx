@@ -2,9 +2,6 @@ import React from "react";
 import pencil from "../../images/editPencil.svg";
 import editButton from "../../images/button__edit.svg";
 import addButton from "../../images/button__add-post.svg";
-import closeIcon from "../../images/popup__closeicon.png";
-//import like from "../../images/grid__box-like.svg";
-//import trashIcon from "../../images/Trash_icon.svg";
 import profilePhoto from "../../images/profile__photo-full.jpg";
 
 import Popup from "./components/Popup/Popup.jsx";
@@ -46,8 +43,6 @@ export default function Main() {
     title: "Alterar foto de perfil",
     children: <EditAvatar />,
   };
-
-  // console.log(popup);
 
   function handleOpenPopup(popup) {
     setPopup(popup);

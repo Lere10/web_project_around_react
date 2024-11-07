@@ -4,7 +4,7 @@ import "../../../../../../blocks/popup.css";
 
 export default function EditAvatar() {
   return (
-    <form className="form popup__form" noValidate>
+    <form className="form popup__form">
       <fieldset className="form__fieldset">
         <input
           id="avatarLink"

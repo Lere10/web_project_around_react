@@ -4,7 +4,7 @@ import "../../../../../../blocks/popup.css";
 
 export default function NewCard() {
   return (
-    <form className="form popup__form" noValidate>
+    <form className="form popup__form">
       <fieldset className="form__fieldset">
         <input
           type="text"
