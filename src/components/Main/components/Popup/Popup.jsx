@@ -8,13 +8,17 @@ export default function Popup(props) {
     <>
       <section className="popup" id="popupUser">
         <div className="popup__container" id="popupOverlay">
-          <img
-            onClick={onClose}
-            src={closeIcon}
-            id="closeIcon"
-            alt="Ícone para fechar popup"
-            className="popup__closer"
-          />
+          {title ? (
+            <img
+              onClick={onClose}
+              src={closeIcon}
+              id="closeIcon"
+              alt="Ícone para fechar popup"
+              className="popup__closer"
+            />
+          ) : (
+            ""
+          )}
           {title ? <h2 className="popup__title">{title}</h2> : ""}
           {children}
         </div>
