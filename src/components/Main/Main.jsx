@@ -32,17 +32,18 @@ const cards = [
   },
 ];
 
+const NewCardPopup = { title: "Novo lugar", children: <NewCard /> };
+const EditProfilePopup = {
+  title: "Editar perfil",
+  children: <EditProfile />,
+};
+const EditAvatarPopup = {
+  title: "Alterar foto de perfil",
+  children: <EditAvatar />,
+};
+
 export default function Main() {
   const [popup, setPopup] = useState(null);
-  const NewCardPopup = { title: "Novo lugar", children: <NewCard /> };
-  const EditProfilePopup = {
-    title: "Editar perfil",
-    children: <EditProfile />,
-  };
-  const EditAvatarPopup = {
-    title: "Alterar foto de perfil",
-    children: <EditAvatar />,
-  };
 
   function handleOpenPopup(popup) {
     setPopup(popup);
