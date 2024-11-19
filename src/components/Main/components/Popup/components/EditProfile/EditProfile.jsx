@@ -1,8 +1,12 @@
 import React from "react";
 import "../../../../../../blocks/form.css";
 import "../../../../../../blocks/popup.css";
+import { CurrentUserContext } from "../../../../../../contexts/CurrentUserContext";
+import { useContext } from "react";
 
 export default function EditProfile() {
+  const currentUser = useContext(CurrentUserContext);
+
   return (
     <form className="form popup__form">
       <fieldset className="form__fieldset">

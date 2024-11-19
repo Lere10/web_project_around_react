@@ -4,9 +4,21 @@ import trashIcon from "../../../../images/Trash_icon.svg";
 import like from "../../../../images/grid__box-like.svg";
 import Popup from "../Popup/Popup.jsx";
 import ImagePopup from "../ImagePopup/ImagePopup.jsx";
+import { useContext } from "react";
+import { CurrentUserContext } from "../../../../contexts/CurrentUserContext.jsx";
 
 export default function Card(props) {
+  const currentUser = useContext(CurrentUserContext);
   const { name, link, isLiked } = props.card;
+  const likesLength = props.card.likes.length;
+
+  const hasOwnLike = props.card.likes.some(
+    (like) => like._id === currentUser._id
+  );
+
+  const cardLikeButtonClassName = `grid__content-like ${
+    hasOwnLike ? "grid__content-like_active" : ""
+  }`;
 
   const [popup, setPopup] = useState(null);
   const ImageComponents = {
@@ -41,10 +53,10 @@ export default function Card(props) {
           <div>
             <img
               src={like}
-              className="grid__content-like"
+              className={cardLikeButtonClassName}
               alt="Icone de coração"
             />
-            <span className="grid__content-likeNumber">0</span>
+            <span className="grid__content-likeNumber">{likesLength}</span>
           </div>
         </div>
 
