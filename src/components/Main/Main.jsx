@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import pencil from "../../images/editPencil.svg";
 import editButton from "../../images/button__edit.svg";
 import addButton from "../../images/button__add-post.svg";
@@ -9,28 +9,34 @@ import NewCard from "./components/Popup/components/NewCard/NewCard.jsx";
 import EditProfile from "./components/Popup/components/EditProfile/EditProfile.jsx";
 import EditAvatar from "./components/Popup/components/EditAvatar/EditAvatar.jsx";
 
+import api from "../../utils/api.js";
+
 import Card from "./components/Card/Card.jsx";
 
 import { useState } from "react";
 
-const cards = [
-  {
-    isLiked: false,
-    _id: "5d1f0611d321eb4bdcd707dd",
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-    owner: "5d1f0611d321eb4bdcd707dd",
-    createdAt: "2019-07-05T08:10:57.741Z",
-  },
-  {
-    isLiked: false,
-    _id: "5d1f064ed321eb4bdcd707de",
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-    owner: "5d1f0611d321eb4bdcd707dd",
-    createdAt: "2019-07-05T08:11:58.324Z",
-  },
-];
+// const cards = [
+//   {
+//     isLiked: false,
+//     _id: "5d1f0611d321eb4bdcd707dd",
+//     name: "Yosemite Valley",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
+//     owner: "5d1f0611d321eb4bdcd707dd",
+//     createdAt: "2019-07-05T08:10:57.741Z",
+//   },
+//   {
+//     isLiked: false,
+//     _id: "5d1f064ed321eb4bdcd707de",
+//     name: "Lake Louise",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
+//     owner: "5d1f0611d321eb4bdcd707dd",
+//     createdAt: "2019-07-05T08:11:58.324Z",
+//   },
+// ];
+
+const [cards, setCards] = useState([]);
+
+useEffect(() => {}, []);
 
 const NewCardPopup = { title: "Novo lugar", children: <NewCard /> };
 const EditProfilePopup = {
