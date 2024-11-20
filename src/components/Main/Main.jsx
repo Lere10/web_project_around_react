@@ -51,6 +51,13 @@ export default function Main() {
     setPopup(null);
   }
 
+  async function handleCardDelete(card) {
+    api.deleteCard(card._id);
+    setCards((prevCards) =>
+      prevCards.filter((cardF) => cardF._id !== card._id)
+    );
+  }
+
   async function handleCardLike(card) {
     const isLiked = card.likes.some((like) => like._id === currentUser._id);
     if (!isLiked) {
@@ -137,6 +144,7 @@ export default function Main() {
             <Card
               key={card._id}
               card={card}
+              onCardDelete={() => handleCardDelete(card)}
               handleCardLike={() => handleCardLike(card)}
               isLiked={card.likes.some((like) => like._id === currentUser._id)}
             />

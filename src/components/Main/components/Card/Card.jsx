@@ -11,6 +11,7 @@ export default function Card(props) {
   const currentUser = useContext(CurrentUserContext);
   const { name, link } = props.card;
   const isLiked = props.isLiked;
+  const handleCardDelete = props.onCardDelete;
   const handleCardLike = props.handleCardLike;
   const likesLength = props.card.likes.length;
 
@@ -60,6 +61,7 @@ export default function Card(props) {
         </div>
 
         <img
+          onClick={handleCardDelete}
           src={trashIcon}
           className="grid__delete-button"
           alt="Ícone de lixeira"
