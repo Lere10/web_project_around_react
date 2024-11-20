@@ -11,6 +11,7 @@ export default function Card(props) {
   const currentUser = useContext(CurrentUserContext);
   const { name, link } = props.card;
   const isLiked = props.isLiked;
+  const handleCardLike = props.handleCardLike;
   const likesLength = props.card.likes.length;
 
   const cardLikeButtonClassName = `grid__content-like ${
@@ -50,6 +51,7 @@ export default function Card(props) {
           <div>
             <img
               src={like}
+              onClick={handleCardLike}
               className={cardLikeButtonClassName}
               alt="Icone de coração"
             />

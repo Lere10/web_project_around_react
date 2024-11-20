@@ -51,9 +51,33 @@ export default function Main() {
     setPopup(null);
   }
 
-  const hasOwnLike = cards.map((card) =>
-    card.likes.some((like) => like._id === currentUser._id)
-  );
+  async function handleCardLike(card) {
+    const isLiked = card.likes.some((like) => like._id === currentUser._id);
+    if (!isLiked) {
+      api
+        .apiLike(card._id)
+        .then((updatedCard) => {
+          setCards((cardState) =>
+            cardState.map((currentCard) =>
+              currentCard._id === card._id ? updatedCard : currentCard
+            )
+          );
+        })
+        .catch((error) => console.error(error));
+    } else {
+      api
+        .apiDislike(card._id)
+        .then((updatedCard) => {
+          console.log(updatedCard);
+          setCards((cardState) =>
+            cardState.map((currentCard) =>
+              currentCard._id === card._id ? updatedCard : currentCard
+            )
+          );
+        })
+        .catch((error) => console.error(error));
+    }
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -113,6 +137,7 @@ export default function Main() {
             <Card
               key={card._id}
               card={card}
+              handleCardLike={() => handleCardLike(card)}
               isLiked={card.likes.some((like) => like._id === currentUser._id)}
             />
           ))}
