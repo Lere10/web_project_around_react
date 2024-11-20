@@ -34,7 +34,6 @@ export default function Main() {
 
   useEffect(() => {
     api.getInitialCards().then((res) => {
-      console.log(res);
       setCards(res);
     });
   }, []);
@@ -42,7 +41,6 @@ export default function Main() {
   useEffect(() => {
     api.getUser().then((res) => {
       setCurrentUser(res);
-      console.log(res);
     });
   }, []);
 
@@ -52,6 +50,10 @@ export default function Main() {
   function handleClosePopup() {
     setPopup(null);
   }
+
+  const hasOwnLike = cards.map((card) =>
+    card.likes.some((like) => like._id === currentUser._id)
+  );
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -108,7 +110,11 @@ export default function Main() {
 
         <ul className="grid">
           {cards.map((card) => (
-            <Card key={card._id} card={card} />
+            <Card
+              key={card._id}
+              card={card}
+              isLiked={card.likes.some((like) => like._id === currentUser._id)}
+            />
           ))}
         </ul>
 

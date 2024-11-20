@@ -9,15 +9,12 @@ import { CurrentUserContext } from "../../../../contexts/CurrentUserContext.jsx"
 
 export default function Card(props) {
   const currentUser = useContext(CurrentUserContext);
-  const { name, link, isLiked } = props.card;
+  const { name, link } = props.card;
+  const isLiked = props.isLiked;
   const likesLength = props.card.likes.length;
 
-  const hasOwnLike = props.card.likes.some(
-    (like) => like._id === currentUser._id
-  );
-
   const cardLikeButtonClassName = `grid__content-like ${
-    hasOwnLike ? "grid__content-like_active" : ""
+    isLiked ? "grid__content-like_active" : ""
   }`;
 
   const [popup, setPopup] = useState(null);
