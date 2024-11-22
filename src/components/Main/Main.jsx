@@ -27,161 +27,89 @@ const EditAvatarPopup = {
   children: <EditAvatar />,
 };
 
-export default function Main() {
-  const [currentUser, setCurrentUser] = useState({});
-  //cards
-  const [cards, setCards] = useState([]);
-  const [popup, setPopup] = useState(null);
-
-  const handleUpdateAvatar = async (data) => {
-    await api.setNewAvatar(data);
-    setCurrentUser((prevUser) => ({ ...prevUser, avatar: data.link }));
-
-    handleClosePopup();
-  };
-
-  //cards
-  useEffect(() => {
-    api.getInitialCards().then((res) => {
-      setCards(res);
-    });
-  }, []);
-  //
-
-  useEffect(() => {
-    api.getUser().then((res) => {
-      setCurrentUser(res);
-    });
-  }, []);
-
-  const handleUpdateUser = async (data) => {
-    await api.setNewUser(data);
-    setCurrentUser({
-      name: data.name,
-      about: data.about,
-      avatar: currentUser.avatar,
-    });
-    handleClosePopup();
-  };
-
-  function handleOpenPopup(popup) {
-    setPopup(popup);
-  }
-  function handleClosePopup() {
-    setPopup(null);
-  }
-
-  //cards
-  async function handleCardDelete(card) {
-    api.deleteCard(card._id);
-    setCards((prevCards) =>
-      prevCards.filter((cardDelete) => cardDelete._id !== card._id)
-    );
-  }
-  //
-
-  //cards
-  async function handleCardLike(card) {
-    const isLiked = card.likes.some((like) => like._id === currentUser._id);
-    if (!isLiked) {
-      await api
-        .apiLike(card._id)
-        .then((updatedCard) => {
-          setCards((cardState) =>
-            cardState.map((currentCard) =>
-              currentCard._id === card._id ? updatedCard : currentCard
-            )
-          );
-        })
-        .catch((error) => console.error(error));
-    } else {
-      await api
-        .apiDislike(card._id)
-        .then((updatedCard) => {
-          setCards((cardState) =>
-            cardState.map((currentCard) =>
-              currentCard._id === card._id ? updatedCard : currentCard
-            )
-          );
-        })
-        .catch((error) => console.error(error));
-    }
-  }
-  //
+export default function Main({
+  cards,
+  handleCardLike,
+  handleCardDelete,
+  popup,
+  handleOpenPopup,
+  handleClosePopup,
+}) {
+  const { currentUser } = useContext(CurrentUserContext);
 
   return (
-    <CurrentUserContext.Provider
-      value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
-    >
-      <main>
-        <section className="profile">
-          <div className="profile__info">
-            <div className="profile__info-photo-portrait">
-              <img
-                onClick={() => {
-                  handleOpenPopup(EditAvatarPopup);
-                }}
-                src={pencil}
-                alt="Ícone de lápis"
-                className="profile__edit-pencil"
-              />
-              <img
-                src={currentUser.avatar}
-                alt="Foto de perfil"
-                className="profile__photo"
-              />
-            </div>
-            <div>
-              <div className="profile__info-content">
-                <h1 className="profile__info-name">{currentUser.name}</h1>
-                <button type="button" className="profile__button-open-form">
-                  <img
-                    onClick={() => {
-                      handleOpenPopup(EditProfilePopup);
-                    }}
-                    src={editButton}
-                    alt="Botão de editar perfil"
-                    className="profile__button-open-form-img"
-                  />
-                </button>
-              </div>
-              <p className="profile__info-bio">{currentUser.about}</p>
-            </div>
-          </div>
-
-          <button
-            onClick={() => {
-              handleOpenPopup(NewCardPopup);
-            }}
-            type="button"
-            className="profile__button-add-post"
-          >
+    // <CurrentUserContext.Provider
+    //   value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
+    // >
+    <main>
+      <section className="profile">
+        <div className="profile__info">
+          <div className="profile__info-photo-portrait">
             <img
-              src={addButton}
-              className="profile__button-add-post-img"
-              alt="caractere de adição"
+              onClick={() => {
+                handleOpenPopup(EditAvatarPopup);
+              }}
+              src={pencil}
+              alt="Ícone de lápis"
+              className="profile__edit-pencil"
             />
-          </button>
-        </section>
-
-        <ul className="grid">
-          {cards.map((card) => (
-            <Card
-              key={card._id}
-              card={card}
-              onCardDelete={() => handleCardDelete(card)}
-              handleCardLike={() => handleCardLike(card)}
-              isLiked={card.likes.some((like) => like._id === currentUser._id)}
+            <img
+              src={currentUser.avatar}
+              alt="Foto de perfil"
+              className="profile__photo"
             />
-          ))}
-        </ul>
+          </div>
+          <div>
+            <div className="profile__info-content">
+              <h1 className="profile__info-name">{currentUser.name}</h1>
+              <button type="button" className="profile__button-open-form">
+                <img
+                  onClick={() => {
+                    handleOpenPopup(EditProfilePopup);
+                  }}
+                  src={editButton}
+                  alt="Botão de editar perfil"
+                  className="profile__button-open-form-img"
+                />
+              </button>
+            </div>
+            <p className="profile__info-bio">{currentUser.about}</p>
+          </div>
+        </div>
 
-        {popup && (
-          <Popup onClose={handleClosePopup} title={popup.title}>
-            {popup.children}
-          </Popup>
-        )}
-      </main>
-    </CurrentUserContext.Provider>
+        <button
+          onClick={() => {
+            handleOpenPopup(NewCardPopup);
+          }}
+          type="button"
+          className="profile__button-add-post"
+        >
+          <img
+            src={addButton}
+            className="profile__button-add-post-img"
+            alt="caractere de adição"
+          />
+        </button>
+      </section>
+
+      <ul className="grid">
+        {cards.map((card) => (
+          <Card
+            key={card._id}
+            card={card}
+            onCardDelete={() => handleCardDelete(card)}
+            handleCardLike={() => handleCardLike(card)}
+            isLiked={card.likes.some((like) => like._id === currentUser._id)}
+          />
+        ))}
+      </ul>
+
+      {popup && (
+        <Popup onClose={handleClosePopup} title={popup.title}>
+          {popup.children}
+        </Popup>
+      )}
+    </main>
+    // </CurrentUserContext.Provider>
   );
 }

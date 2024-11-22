@@ -9,10 +9,6 @@ export default function EditAvatar() {
 
   const avatarRef = useRef();
 
-  // const handleAvatarChange = (e) => {
-  //   setAvatar(e.target.value);
-  // };
-
   function handleSubmit(e) {
     e.preventDefault();
     handleUpdateAvatar({ link: avatarRef.current.value });
