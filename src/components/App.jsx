@@ -43,6 +43,14 @@ function App() {
     });
   }, []);
 
+  const handleAddPlace = async (data) => {
+    api.setNewCard(data).then((newCard) => {
+      setCards([newCard, ...cards]);
+    });
+
+    handleClosePopup();
+  };
+
   async function handleCardDelete(card) {
     api.deleteCard(card._id);
     setCards((prevCards) =>
@@ -87,7 +95,12 @@ function App() {
   return (
     <>
       <CurrentUserContext.Provider
-        value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
+        value={{
+          currentUser,
+          handleUpdateUser,
+          handleUpdateAvatar,
+          handleAddPlace,
+        }}
       >
         <div className="page__content">
           <Header />

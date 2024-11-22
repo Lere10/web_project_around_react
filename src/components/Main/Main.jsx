@@ -93,13 +93,17 @@ export default function Main({
       </section>
 
       <ul className="grid">
-        {cards.map((card) => (
+        {cards.map((card, index) => (
           <Card
-            key={card._id}
+            key={card._id || index}
             card={card}
             onCardDelete={() => handleCardDelete(card)}
             handleCardLike={() => handleCardLike(card)}
-            isLiked={card.likes.some((like) => like._id === currentUser._id)}
+            isLiked={
+              card.likes
+                ? card.likes.some((like) => like._id === currentUser._id)
+                : false
+            }
           />
         ))}
       </ul>
