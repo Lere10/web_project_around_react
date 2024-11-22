@@ -1,8 +1,9 @@
-# React + Vite
+# Tripleten web_project_around
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sprint14
+Aplicação web de perfil de rede social para compartilhamento de fotos. Implementado com React (React Tools e Hooks) +Vite.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Projeto feito com base no layout fornecido no Figma:
+https://www.figma.com/design/TTK8N4SvXvhdzoHfGM7krr/Web_Brief_Sprint_7_PT-%7C-Ao-redor-dos-EUA.-%7C-desktop-%2B-mobile?node-id=1-147&t=LiQZKAT96aySQpta-1
+
