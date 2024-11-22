@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import pencil from "../../images/editPencil.svg";
 import editButton from "../../images/button__edit.svg";
 import addButton from "../../images/button__add-post.svg";
@@ -32,6 +32,14 @@ export default function Main() {
   const [cards, setCards] = useState([]);
   const [popup, setPopup] = useState(null);
 
+  const avatarRef = useRef();
+
+  const handleUpdateAvatar = async (data) => {
+    await api.setNewAvatar(data);
+    avatarRef.current = data.link;
+    handleClosePopup();
+  };
+
   useEffect(() => {
     api.getInitialCards().then((res) => {
       setCards(res);
@@ -52,7 +60,6 @@ export default function Main() {
       about: data.about,
       avatar: currentUser.avatar,
     });
-    console.log(currentUser);
     handleClosePopup();
   };
 
@@ -99,7 +106,9 @@ export default function Main() {
   }
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser, handleUpdateUser }}>
+    <CurrentUserContext.Provider
+      value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
+    >
       <main>
         <section className="profile">
           <div className="profile__info">
@@ -113,6 +122,7 @@ export default function Main() {
                 className="profile__edit-pencil"
               />
               <img
+                ref={avatarRef}
                 src={currentUser.avatar}
                 alt="Foto de perfil"
                 className="profile__photo"
