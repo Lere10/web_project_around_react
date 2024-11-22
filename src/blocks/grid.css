@@ -100,7 +100,7 @@
   font-weight: 400;
 }
 .grid__delete-button {
-  display: flex;
+  display: none;
   position: absolute;
   top: 18px;
   right: 15px;

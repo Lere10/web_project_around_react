@@ -4,15 +4,13 @@ import trashIcon from "../../../../images/Trash_icon.svg";
 import like from "../../../../images/grid__box-like.svg";
 import Popup from "../Popup/Popup.jsx";
 import ImagePopup from "../ImagePopup/ImagePopup.jsx";
-import { useContext } from "react";
-import { CurrentUserContext } from "../../../../contexts/CurrentUserContext.jsx";
 
 // import { useEffect } from "react";
 
 export default function Card(props) {
-  const { currentUser } = useContext(CurrentUserContext);
   const { name, link } = props.card;
   const isLiked = props.isLiked;
+  const isOwn = props.isOwn;
   const handleCardDelete = props.onCardDelete;
   const handleCardLike = props.handleCardLike;
   const likesLength = props.card.likes.length;
@@ -20,6 +18,9 @@ export default function Card(props) {
   const cardLikeButtonClassName = `grid__content-like ${
     isLiked ? "grid__content-like_active" : ""
   }`;
+  const cardDeleteButtonClassName = isOwn
+    ? "grid__delete-button grid__delete-button_show"
+    : "grid__delete-button";
 
   const [popup, setPopup] = useState(null);
   const ImageComponents = {
@@ -65,7 +66,7 @@ export default function Card(props) {
         <img
           onClick={handleCardDelete}
           src={trashIcon}
-          className="grid__delete-button"
+          className={cardDeleteButtonClassName}
           alt="Ícone de lixeira"
         />
       </div>

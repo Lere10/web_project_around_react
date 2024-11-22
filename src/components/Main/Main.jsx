@@ -1,21 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import pencil from "../../images/editPencil.svg";
 import editButton from "../../images/button__edit.svg";
 import addButton from "../../images/button__add-post.svg";
-// import profilePhoto from "../../images/profile__photo-full.jpg";
 
 import Popup from "./components/Popup/Popup.jsx";
 import NewCard from "./components/Popup/components/NewCard/NewCard.jsx";
 import EditProfile from "./components/Popup/components/EditProfile/EditProfile.jsx";
 import EditAvatar from "./components/Popup/components/EditAvatar/EditAvatar.jsx";
 
-import api from "../../utils/api.jsx";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.jsx";
 import { useContext } from "react";
 
 import Card from "./components/Card/Card.jsx";
-
-import { useState } from "react";
 
 const NewCardPopup = { title: "Novo lugar", children: <NewCard /> };
 const EditProfilePopup = {
@@ -36,11 +32,7 @@ export default function Main({
   handleClosePopup,
 }) {
   const { currentUser } = useContext(CurrentUserContext);
-
   return (
-    // <CurrentUserContext.Provider
-    //   value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
-    // >
     <main>
       <section className="profile">
         <div className="profile__info">
@@ -104,6 +96,7 @@ export default function Main({
                 ? card.likes.some((like) => like._id === currentUser._id)
                 : false
             }
+            isOwn={card.owner._id === currentUser._id}
           />
         ))}
       </ul>
@@ -114,6 +107,5 @@ export default function Main({
         </Popup>
       )}
     </main>
-    // </CurrentUserContext.Provider>
   );
 }

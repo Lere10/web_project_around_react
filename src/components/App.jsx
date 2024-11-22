@@ -6,7 +6,6 @@ import Footer from "./Footer/Footer.jsx";
 
 import api from "../utils/api.jsx";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.jsx";
-import { useContext } from "react";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
