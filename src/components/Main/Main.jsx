@@ -44,6 +44,18 @@ export default function Main() {
     });
   }, []);
 
+  const handleUpdateUser = async (data) => {
+    console.log(data);
+    await api.setNewUser(data);
+    setCurrentUser({
+      name: data.name,
+      about: data.about,
+      avatar: currentUser.avatar,
+    });
+    console.log(currentUser);
+    handleClosePopup();
+  };
+
   function handleOpenPopup(popup) {
     setPopup(popup);
   }
@@ -61,7 +73,7 @@ export default function Main() {
   async function handleCardLike(card) {
     const isLiked = card.likes.some((like) => like._id === currentUser._id);
     if (!isLiked) {
-      api
+      await api
         .apiLike(card._id)
         .then((updatedCard) => {
           setCards((cardState) =>
@@ -72,7 +84,7 @@ export default function Main() {
         })
         .catch((error) => console.error(error));
     } else {
-      api
+      await api
         .apiDislike(card._id)
         .then((updatedCard) => {
           console.log(updatedCard);
@@ -87,7 +99,7 @@ export default function Main() {
   }
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={{ currentUser, handleUpdateUser }}>
       <main>
         <section className="profile">
           <div className="profile__info">

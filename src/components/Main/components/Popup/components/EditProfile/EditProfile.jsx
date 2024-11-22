@@ -1,16 +1,33 @@
 import React from "react";
 import "../../../../../../blocks/form.css";
 import "../../../../../../blocks/popup.css";
+import { useState } from "react";
 import { CurrentUserContext } from "../../../../../../contexts/CurrentUserContext";
 import { useContext } from "react";
 
 export default function EditProfile() {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser, handleUpdateUser } = useContext(CurrentUserContext);
+
+  const [name, setName] = useState(currentUser.name);
+  const [about, setAbout] = useState(currentUser.about);
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+  const handleAboutChange = (e) => {
+    setAbout(e.target.value);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleUpdateUser({ name, about });
+  };
 
   return (
-    <form className="form popup__form">
+    <form className="form popup__form" onSubmit={handleSubmit}>
       <fieldset className="form__fieldset">
         <input
+          value={name}
+          onChange={handleNameChange}
           id="name"
           type="text"
           className="form__input form__input-name"
@@ -20,6 +37,8 @@ export default function EditProfile() {
         />
         <span className="form__input-error-message form__name-error"></span>
         <input
+          value={about}
+          onChange={handleAboutChange}
           id="bio"
           type="text"
           className="form__input form__input-bio"

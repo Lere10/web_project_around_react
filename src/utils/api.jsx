@@ -29,7 +29,7 @@ class Api {
     });
   }
   setNewUser(data) {
-    fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       ...this._options,
       body: JSON.stringify({

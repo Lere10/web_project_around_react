@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { CurrentUserContext } from "../../../../contexts/CurrentUserContext.jsx";
 
 export default function Card(props) {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
   const { name, link } = props.card;
   const isLiked = props.isLiked;
   const handleCardDelete = props.onCardDelete;
