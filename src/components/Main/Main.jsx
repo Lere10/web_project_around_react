@@ -8,7 +8,7 @@ import NewCard from "./components/Popup/components/NewCard/NewCard.jsx";
 import EditProfile from "./components/Popup/components/EditProfile/EditProfile.jsx";
 import EditAvatar from "./components/Popup/components/EditAvatar/EditAvatar.jsx";
 
-import { CurrentUserContext } from "../../contexts/CurrentUserContext.jsx";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 import { useContext } from "react";
 
 import Card from "./components/Card/Card.jsx";

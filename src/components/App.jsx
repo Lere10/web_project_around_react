@@ -5,7 +5,7 @@ import Main from "./Main/Main.jsx";
 import Footer from "./Footer/Footer.jsx";
 
 import api from "../utils/api.jsx";
-import { CurrentUserContext } from "../contexts/CurrentUserContext.jsx";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});

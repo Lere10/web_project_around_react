@@ -1,7 +1,7 @@
 import React from "react";
 import "../../../../../../blocks/form.css";
 import "../../../../../../blocks/popup.css";
-import { CurrentUserContext } from "../../../../../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../../../../../contexts/CurrentUserContext.js";
 import { useContext, useRef } from "react";
 
 export default function EditAvatar() {
