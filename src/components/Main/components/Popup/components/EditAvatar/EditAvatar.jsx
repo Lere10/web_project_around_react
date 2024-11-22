@@ -2,26 +2,27 @@ import React from "react";
 import "../../../../../../blocks/form.css";
 import "../../../../../../blocks/popup.css";
 import { CurrentUserContext } from "../../../../../../contexts/CurrentUserContext";
-import { useContext, useState } from "react";
+import { useContext, useRef } from "react";
 
 export default function EditAvatar() {
-  const { currentUser, handleUpdateAvatar } = useContext(CurrentUserContext);
-  const [avatar, setAvatar] = useState(currentUser.avatar);
+  const { handleUpdateAvatar } = useContext(CurrentUserContext);
 
-  const handleAvatarChange = (e) => {
-    setAvatar(e.target.value);
-  };
+  const avatarRef = useRef();
+
+  // const handleAvatarChange = (e) => {
+  //   setAvatar(e.target.value);
+  // };
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleUpdateAvatar({ link: avatar });
+    handleUpdateAvatar({ link: avatarRef.current.value });
   }
 
   return (
     <form className="form popup__form" onSubmit={handleSubmit}>
       <fieldset className="form__fieldset">
         <input
-          onChange={handleAvatarChange}
+          ref={avatarRef}
           id="avatarLink"
           type="url"
           className="form__input form__input-bio"

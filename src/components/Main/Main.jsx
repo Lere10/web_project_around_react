@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import pencil from "../../images/editPencil.svg";
 import editButton from "../../images/button__edit.svg";
 import addButton from "../../images/button__add-post.svg";
@@ -29,22 +29,24 @@ const EditAvatarPopup = {
 
 export default function Main() {
   const [currentUser, setCurrentUser] = useState({});
+  //cards
   const [cards, setCards] = useState([]);
   const [popup, setPopup] = useState(null);
 
-  const avatarRef = useRef();
-
   const handleUpdateAvatar = async (data) => {
     await api.setNewAvatar(data);
-    avatarRef.current = data.link;
+    setCurrentUser((prevUser) => ({ ...prevUser, avatar: data.link }));
+
     handleClosePopup();
   };
 
+  //cards
   useEffect(() => {
     api.getInitialCards().then((res) => {
       setCards(res);
     });
   }, []);
+  //
 
   useEffect(() => {
     api.getUser().then((res) => {
@@ -53,7 +55,6 @@ export default function Main() {
   }, []);
 
   const handleUpdateUser = async (data) => {
-    console.log(data);
     await api.setNewUser(data);
     setCurrentUser({
       name: data.name,
@@ -70,13 +71,16 @@ export default function Main() {
     setPopup(null);
   }
 
+  //cards
   async function handleCardDelete(card) {
     api.deleteCard(card._id);
     setCards((prevCards) =>
-      prevCards.filter((cardF) => cardF._id !== card._id)
+      prevCards.filter((cardDelete) => cardDelete._id !== card._id)
     );
   }
+  //
 
+  //cards
   async function handleCardLike(card) {
     const isLiked = card.likes.some((like) => like._id === currentUser._id);
     if (!isLiked) {
@@ -94,7 +98,6 @@ export default function Main() {
       await api
         .apiDislike(card._id)
         .then((updatedCard) => {
-          console.log(updatedCard);
           setCards((cardState) =>
             cardState.map((currentCard) =>
               currentCard._id === card._id ? updatedCard : currentCard
@@ -104,6 +107,7 @@ export default function Main() {
         .catch((error) => console.error(error));
     }
   }
+  //
 
   return (
     <CurrentUserContext.Provider
@@ -122,7 +126,6 @@ export default function Main() {
                 className="profile__edit-pencil"
               />
               <img
-                ref={avatarRef}
                 src={currentUser.avatar}
                 alt="Foto de perfil"
                 className="profile__photo"
