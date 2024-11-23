@@ -1,5 +1,3 @@
-import React from "react";
-
 class Api {
   constructor(baseURL, options) {
     this._baseUrl = baseURL;
@@ -97,8 +95,6 @@ class Api {
     fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
       ...this._options,
-    }).then((res) => {
-      console.log(`Delete feito: ${res}`);
     });
   }
 }

@@ -5,8 +5,6 @@ import like from "../../../../images/grid__box-like.svg";
 import Popup from "../Popup/Popup.jsx";
 import ImagePopup from "../ImagePopup/ImagePopup.jsx";
 
-// import { useEffect } from "react";
-
 export default function Card(props) {
   const { name, link } = props.card;
   const isLiked = props.isLiked;
